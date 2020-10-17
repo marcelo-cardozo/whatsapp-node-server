@@ -1,9 +1,11 @@
 import express from "express";
-import whatsappRoutes from "./routes/whatsapp";
+import messageRouter from "./routes/messages";
 import bodyParser from "body-parser";
 
-const app = express();
 
+const app = express();
 app.use(bodyParser.json());
-app.use(whatsappRoutes);
-app.listen(3000);
+app.use(messageRouter);
+
+
+const server = app.listen(3000);
