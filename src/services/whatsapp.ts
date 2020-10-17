@@ -40,8 +40,15 @@ const onMessageReceived = (listener: (message: Message) => void) => {
 const onQr = (listener: (qr: string) => void) => {
     WhatsappClient.on("qr", listener);
 }
+
+const getQr = async (): Promise<string> => {
+    return new Promise<string>(function (resolve) {
+        WhatsappClient.on("qr", (qr) => resolve(qr));
+    })
+}
+
 const sendMessage = async (number: number, message: string) => {
     await WhatsappClient.sendMessage(`${number}@c.us`, message);
 }
 
-export {onClientReady, onMessageReceived, onQr, isClientReady, sendMessage}
+export {onClientReady, onMessageReceived, onQr, getQr, isClientReady, sendMessage}
