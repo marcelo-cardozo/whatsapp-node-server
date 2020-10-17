@@ -1,4 +1,6 @@
 import express from "express";
+import WebSocket from "ws";
+import {connectionHandler} from "./ws/websocket";
 import messageRouter from "./routes/messages";
 import bodyParser from "body-parser";
 
@@ -9,3 +11,6 @@ app.use(messageRouter);
 
 
 const server = app.listen(3000);
+const wss = new WebSocket.Server({server});
+
+wss.on("connection", connectionHandler);

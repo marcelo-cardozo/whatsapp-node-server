@@ -26,9 +26,22 @@ WhatsappClient.on("ready", () => {
     _clientReady = true;
 });
 
+const onClientReady = (listener: () => void) => {
+    WhatsappClient.on("ready", () => {
+        _clientReady = true;
+        listener();
+    });
+}
 
+const onMessageReceived = (listener: (message: Message) => void) => {
+    WhatsappClient.on("message", listener);
+}
+
+const onQr = (listener: (qr: string) => void) => {
+    WhatsappClient.on("qr", listener);
+}
 const sendMessage = async (number: number, message: string) => {
     await WhatsappClient.sendMessage(`${number}@c.us`, message);
 }
 
-export {isClientReady, sendMessage}
+export {onClientReady, onMessageReceived, onQr, isClientReady, sendMessage}
