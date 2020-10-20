@@ -105,3 +105,4 @@ dist
 
 dist/
 .idea/
+src/services/session.json
